@@ -15,7 +15,7 @@
                 <p class="attrs">{{item.goodsAttr}}</p>
                 <div class="flex just-between align-center">
                   <template v-if="item.goodsId.isWholesale=='1'">
-                    
+
                     <p class="fs-16 danger-color" v-if="+member.merchantType==1">
                       ￥{{item.goodsAttrStockId.standardPrice}}
                     </p>
@@ -202,7 +202,7 @@ export default {
               (item.goodsAttrStockId.price + item.goodsId.pointNicePrice) *
               item.goodsNum;
           } else if (item.goodsId.isCanUserCou == "0") {
-            if (item.goodsId.isWholesale=='1') {
+            if (item.goodsId.isWholesale == "1") {
               a +=
                 +this.member.merchantType > 1
                   ? item.goodsAttrStockId.honourPrice * item.goodsNum
@@ -278,13 +278,18 @@ export default {
             "SET_PAY_PASSWORD",
             !!_result.gjfMemberInfo.payPassword
           );
-          var tips = '0';
-          if (_result.isCanUseCou == 0) {
-            tips = '1';
+          var tips = "0";
+          if (_result.isWohsalse == "1") {
+            tips = "0";
+          } else {
+            if (_result.isCanUseCou == 0) {
+              tips = "1";
+            }
+            if (_result.isCanUseCou == 3) {
+              tips = "0";
+            }
           }
-          if (_result.isCanUseCou == 3) {
-            tips = '0';
-          }
+
           vm.$store.commit("RECORD_SETTLE_LIST", _result);
           vm.$router.push({
             name: "SettleBalance",

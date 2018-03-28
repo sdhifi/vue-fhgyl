@@ -52,12 +52,12 @@
           </template>
           <template v-else>
             <yd-cell-item>
-              <span slot="left" class="primary-color">普通商家兑换：{{info.productAttrStock&&info.productAttrStock.standardTotalAmount}}
+              <span slot="left" class="primary-color">商家兑换：{{info.productAttrStock&&info.productAttrStock.standardTotalAmount}}
                 <span class="iconfont self-quan"></span>
               </span>
             </yd-cell-item>
             <yd-cell-item>
-              <span slot="left" class="royal-color">VIP商家兑换：{{info.productAttrStock&&info.productAttrStock.honourTotalAmount}}
+              <span slot="left" class="royal-color">企业兑换：{{info.productAttrStock&&info.productAttrStock.honourTotalAmount}}
                 <span class="iconfont self-quan"></span>
               </span>
             </yd-cell-item>
@@ -124,7 +124,7 @@
           </div>
           <yd-cell-group v-else-if="info.isWholesale=='1' && +member.merchantType <2">
             <yd-cell-item arrow type="link" href="/merchant/upgrade">
-              <p slot="left">VIP商家版立省
+              <p slot="left">企业版立省
                 <span class="danger-color fs-14">￥{{info.productAttrStock.honourPreferentialMoney}}</span>
               </p>
               <span slot="right" class="fs-14">去升级</span>
@@ -281,7 +281,7 @@ export default {
           //图片路径处理
           _result.content = _result.content.replace(
             /\/userfiles/g,
-            "http://yg.gjfeng.com/userfiles"
+            "http://jin.gjfeng.com/userfiles"
           );
           if (_result.goodSoure != "2") {
             _result.attrs.forEach((item, index) => {
@@ -461,13 +461,16 @@ export default {
         });
         let attrIds = this.info.productAttrStock.productAttrIds;
         var tips = '0';
-        if (this.$route.query.tips && this.$route.query.tips == 0) {
-          tips = '0';
-        } else if (this.$route.query.tips!=0 && this.info.isCanUserCou == "3") {
-          tips = '0';
-        } else if (this.$route.query.tips!=0 && this.info.isCanUserCou == "0") {
-          tips = '1';
-        }
+        if (this.info.isWholesale == "1") {
+            tips = "0";
+          } else {
+            if (this.info.isCanUserCou == '0') {
+              tips = "1";
+            }
+            if (this.info.isCanUserCou == '3') {
+              tips = "0";
+            }
+          }
         this.$dialog.loading.open("正在发起订单...");
         mui.ajax({
           url: toAdd,

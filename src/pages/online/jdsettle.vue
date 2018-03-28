@@ -48,7 +48,7 @@
       <yd-cell-group>
         <yd-cell-item>
           <span slot="left">配送方式</span>
-          <span slot="right" class="fs-14">快递：费用合计到总金额</span>
+          <span slot="right" class="fs-14">快递费用合计到总金额</span>
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left">支付明细</span>

@@ -41,7 +41,7 @@
             <img :src="item.goodsImg" :alt="item.goodsName" class="pd-img">
             <div class="order-info flex-1">
               <h3 class="pd-name">{{item.goodsName}}</h3>
-              <p v-if="settleList.isWholesale=='0' || settleList.isWohsalse=='0'">{{item.goodsAttr}}</p>
+              <p>{{item.goodsAttr}}</p>
               <div class="flex just-between">
                 <span class="danger-color fs-16" v-if="settleList.isCanUseCou==3">{{item.goodsAmount}}代金券</span>
                 <template v-else>
