@@ -37,6 +37,10 @@
           <span slot="icon" class="iconfont-large self-yinhangka" style="color: #e7d489;"></span>
           <span slot="text">银行卡</span>
         </yd-grids-item>
+        <yd-grids-item v-if="+member.merchantType>0" link="/merchant/coupon">
+          <span slot="icon" class="iconfont-large self-tiqufuli" style="color: #e7d489;"></span>
+          <span slot="text">赠送代金券</span>
+        </yd-grids-item>
         <yd-grids-item link="/trade/welfrecord">
           <span slot="icon" class="iconfont-large self-fulijilu" style="color: #ee3355;"></span>
           <span slot="text">福利记录</span>
@@ -49,10 +53,6 @@
           <span slot="icon" class="iconfont-large self-shenghuofuwu" style="color: #e7d489;"></span>
           <span slot="text">升级赠送</span>
         </yd-grids-item> -->
-        <yd-grids-item v-if="+member.merchantType>0" link="/merchant/coupon">
-          <span slot="icon" class="iconfont-large self-tiqufuli" style="color: #e7d489;"></span>
-          <span slot="text">赠送代金券</span>
-        </yd-grids-item>
         <!-- <yd-grids-item link="/trade/interest?type=0">
           <span slot="icon" class="iconfont-large self-xiaofeijilu" style="color: #663355;"></span>
           <span slot="text">消费记录</span>

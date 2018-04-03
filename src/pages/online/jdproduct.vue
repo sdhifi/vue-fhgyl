@@ -260,4 +260,7 @@ section {
 .actionsheet-toggle {
   transform: translate3d(0, 0, 0);
 }
+.pd-content{
+  line-height: 0;
+}
 </style>
