@@ -182,7 +182,7 @@ import {
   addMyCollect,
   stockAndPrice,
   addCart,
-  toAdd
+  toAddOrder
 } from "../../api/index";
 import { mixin } from "components/common/mixin";
 export default {
@@ -473,7 +473,7 @@ export default {
           }
         this.$dialog.loading.open("正在发起订单...");
         mui.ajax({
-          url: toAdd,
+          url: toAddOrder,
           type: "post",
           timeout: 10000,
           headers: { "app-version": "v1.0" },
@@ -485,7 +485,7 @@ export default {
             orderAddressId: "",
             logist,
             account: this.account,
-            token: md5(`gjfengtoAdd${this.account}`)
+            token: md5(`gjfengtoAddOrder${this.account}`)
           },
           success(res) {
             vm.$dialog.loading.close();

@@ -34,6 +34,7 @@ let findProprietaryJdCategory = `${pd}/findProprietaryJdCategory` //获取京东
 let findJdProprietaryProByCatId = `${pd}/findJdProprietaryProByCatId` //获取分类商品
 let findJdProprietaryProDetail = `${pd}/findJdProprietaryProDetail` //获取京东自营商城分类商品详情
 let addJdProprietaryProduct = `${pd}/addJdProprietaryProduct` //添加京东商品信息
+let toAddOrder = `${pd}/toAddOrder` //立即下单
 
 let findProdutCat = `${baseUrl}/wx/product/findProdutCat` //天猫|淘宝目录
 let findProductList = `${baseUrl}/wx/product/findProductList` //天猫|淘宝商品
@@ -64,7 +65,7 @@ let getAreaByType = `${address}/getAreaByType` //获取省市区信息
 let register = baseUrl + `/app/${VERSION}/register` //注册
 let login = baseUrl + `/app/${VERSION}/login` //登录
 let forgetPassWord = baseUrl + `/app/${VERSION}/forgetPassWord` //忘记密码
-let updataLoginPassword = baseUrl + `/app/${VERSION}/updataLoginPassword` //忘记密码
+let updataLoginPassword = baseUrl + `/app/${VERSION}/updataLoginPassword` //修改登录密码
 
 let memService = `${rule}/memService` //服务协议
 let aboutGjf = `${rule}/aboutGjf` //关于天天
@@ -171,6 +172,7 @@ export {
   findJdProprietaryProByCatId,
   findJdProprietaryProDetail,
   addJdProprietaryProduct,
+  toAddOrder,
 
   findProdutCat,
   findProductList,

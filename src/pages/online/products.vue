@@ -97,6 +97,7 @@ export default {
       this.pageNo = 1;
       this.noData = false;
       this.productList = [];
+      this.$refs.pdlist.$emit("ydui.infinitescroll.reInit");
     },
     getProduct() {
       if (!this.noData) {

@@ -54,7 +54,7 @@
         </yd-cell-item>
         <yd-cell-item arrow type="label" @click.native="navigate('/merchant/give2')" v-if="+member.merchantType>=3">
           <span class="iconfont-large self-shenghuofuwu c2" slot="icon"></span>
-          <span slot="left">赠送商家版或企业家版</span>
+          <span slot="left">赠送商家版或企业版</span>
         </yd-cell-item>
       </yd-cell-group>
       <yd-cell-group>

@@ -135,7 +135,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import { addOrder, toAdd } from "../../api/index";
+import { addOrder } from "../../api/index";
 import { mixin, payMixin } from "components/common/mixin";
 import { Group, Checker, CheckerItem } from "vux";
 export default {
