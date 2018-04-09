@@ -79,7 +79,7 @@
         <yd-cell-item arrow type="label" @click.native="showDialog = true">
           <span class="iconfont-large self-service c1" slot="icon"></span>
           <span slot="left">联系客服</span>
-          <span slot="right" style="color:gold;">4001011553</span>
+          <!-- <span slot="right" style="color:gold;">4009019517</span> -->
         </yd-cell-item>
         <yd-cell-item arrow type="label" @click.native="navigate('/me/updateApp')">
           <span class="iconfont-large self-gengxin c2" slot="icon"></span>

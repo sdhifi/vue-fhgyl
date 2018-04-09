@@ -98,7 +98,7 @@
               <p class="danger-color fs-14" v-else>￥{{info.productAttrStock&&info.productAttrStock.price}}</p>
             </template>
             <template v-else>
-              <p class="danger-color fs-14" v-if="+member.merchantType>1">{{info.productAttrStock.honourTotalAmount}}
+              <p class="danger-color fs-14" v-if="+member.merchantType>1">{{info.productAttrStock&&info.productAttrStock.honourTotalAmount}}
                 <span class="iconfont self-quan"></span>
               </p>
               <p class="danger-color fs-14" v-else>{{info.productAttrStock&&info.productAttrStock.standardTotalAmount}}
