@@ -3,7 +3,7 @@
     <header-top title="网上商城" :back="false" :login="!loginAccount">注册|登录</header-top>
     <main class='scroll-content'>
       <section>
-        <yd-slider :loop="false" :autoplay="60000">
+        <yd-slider :loop="false" :autoplay="3000">
           <yd-slider-item v-for="item in info.indexAds" :key="item.id">
             <router-link :to="{name:'Product',query:{id:item.address.substring(item.address.lastIndexOf('/')+1),tips:0}}">
               <img :src="item.photo" :alt="item.names">
@@ -12,7 +12,19 @@
         </yd-slider>
       </section>
       <section class="vocher-container">
-        <img :src="getLocalImg('fast.jpg')">
+        <div><img :src="getLocalImg('fast.jpg')"></div>
+        <div class="flex align-center news-box">
+          <div class="rolltip">今日资讯：</div>
+          <yd-rollnotice autoplay="4000" class="flex-1">
+            <yd-rollnotice-item v-for="(item,index) in info.newList&&info.newList.result" :key="index">
+              <router-link :to="{name:'NewsDetail',query:{id:item.id}}" class="flex align-center" style="width:100%;">
+                <span class="news-tag">{{item.source}}</span>
+                <span class="news-title flex-1 fs-14">{{item.title}}</span>
+              </router-link>
+            </yd-rollnotice-item>
+          </yd-rollnotice>
+          <router-link :to="{name:'News',params:{update:true}}">更多></router-link>
+        </div>
       </section>
       <section class="platform-container flex just-around">
         <div v-for="(item,index) in platform" :key="index" class="platform-item" @click="navigate(item.link)">
@@ -258,11 +270,11 @@ export default {
 <style lang='less' scoped>
 @import "../../style/mixin.less";
 section {
-  margin-bottom: @pd;
+  margin-bottom: @pd / 2;
   background-color: @white;
 }
 .yd-slider-item img {
-  height: 4rem;
+  max-height: 4rem;
 }
 .platform-container {
   padding: 0.2rem 0 0.1rem;
@@ -275,9 +287,24 @@ section {
   }
 }
 .vocher-container {
-  margin-top: -@pd;
   img {
     width: 100%;
+  }
+  .news-box {
+    padding: @pd 0.1rem 0;
+    .news-tag {
+      display: inline-block;
+      margin-right: 0.1rem;
+      color: @red;
+      border: 1px solid @red;
+      border-radius: 10px;
+      .wh(34px,18px);
+      line-height: 18px;
+      .text-center;
+    }
+    .news-title {
+      .ellipsis;
+    }
   }
 }
 .pd-list {

@@ -390,7 +390,22 @@ const router = new Router({
       meta: {
         keepAlive: false
       }
-    }, {
+    },
+    {
+      path: '/news/index',
+      name: 'News',
+      component: require('../pages/news/index'),
+      meta: {
+        keepAlive: true
+      }
+    },{
+      path: '/news/detail',
+      name: 'NewsDetail',
+      component: require('../pages/news/detail'),
+      meta: {
+        keepAlive: false
+      }
+    },  {
       path: '*',
       redirect: '/online/index'
     }
