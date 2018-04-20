@@ -20,16 +20,14 @@
               <span style="margin-right:.2rem;font-weight:bold;">{{defaultAddress.consigneeName}}</span>
               <span>{{defaultAddress.mobile}}</span>
             </p>
-            <p>收货地址：{{defaultAddress.proviceId.province}}{{defaultAddress.cityId.city}}
-              <span v-if="defaultAddress.areaId">{{defaultAddress.areaId.area}}</span>{{defaultAddress.addressDetail}}</p>
+            <p>收货地址：{{defaultAddress.proviceId.province}}{{defaultAddress.cityId.city}}<span v-if="defaultAddress.areaId">{{defaultAddress.areaId.area}}</span><span v-if="defaultAddress.townId">{{defaultAddress.townId.townName}}</span>{{defaultAddress.addressDetail}}</p>
           </div>
           <div v-else-if="addressList[0]" class="fs-14 flex-1">
             <p>收货人：
               <span style="margin-right:.2rem;font-weight:bold;">{{addressList[0].consigneeName}}</span>
               <span>{{addressList[0].mobile}}</span>
             </p>
-            <p>收货地址：{{addressList[0].proviceId.province}}{{addressList[0].cityId.city}}
-              <span v-if="addressList[0].areaId">{{addressList[0].areaId.area}}</span>{{addressList[0].addressDetail}}</p>
+            <p>收货地址：{{addressList[0].proviceId.province}}{{addressList[0].cityId.city}}<span v-if="addressList[0].areaId">{{addressList[0].areaId.area}}</span><span v-if="addressList[0].townId">{{addressList[0].townId.townName}}</span>{{addressList[0].addressDetail}}</p>
           </div>
           <span class="iconfont self-right"></span>
         </router-link>
@@ -92,14 +90,14 @@
         <yd-cell-item>
           <p slot="right" class="fs-16">
             支付：
-            <span class="danger-color" v-if="orderType=='1'&&!$route.query.buynow">￥{{formatPrice(settleList.pointNiceAmount+settleList.pos)}}</span>
-            <span class="danger-color" v-else-if="orderType=='1'&&$route.query.buynow">￥{{formatPrice(settleList.pointNiceAmount)}}</span>
-            <span class="danger-color" v-else-if="orderType=='2'">￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
-            <span class="danger-color" v-else-if="orderType=='3'">￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
+            <span class="danger-color 1" v-if="orderType=='1'&&!$route.query.buynow">￥{{formatPrice(settleList.pointNiceAmount+settleList.pos)}}</span>
+            <span class="danger-color 2" v-else-if="orderType=='1'&&$route.query.buynow">￥{{formatPrice(settleList.pointNiceAmount)}}</span>
+            <span class="danger-color 3" v-else-if="orderType=='2'">￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
+            <span class="danger-color 4" v-else-if="orderType=='3'">￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
             <template v-else>
-              <span class="danger-color fs-16" v-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='0'">￥{{formatPrice(total2)}}</span>
-              <span class="danger-color fs-16" v-else-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='1'">￥{{formatPrice(total2)}}</span>
-              <span class="danger-color" v-else>￥{{formatPrice(total)}}</span>
+              <span class="danger-color fs-16 5" v-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='0'">￥{{formatPrice(total2)}}</span>
+              <span class="danger-color fs-16 6" v-else-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='1'">￥{{formatPrice(total2)}}</span>
+              <span class="danger-color 7" v-else>￥{{formatPrice(settleList.totalAmount+settleList.pos)}}</span>
             </template>
           </p>
         </yd-cell-item>
@@ -263,9 +261,9 @@ export default {
       });
       cmParams = {
         goodsId: a.join(","),
-        goodsAttrStockId: b.join(","),
-        goodsAttrIds: c.join(";"),
-        goodsAttr: d.join(","),
+        goodsAttrStockId: b.length>0?b.join(","):'',
+        goodsAttrIds:c.length>0? c.join(";"):'',
+        goodsAttr: d.length>0?d.join(","):'',
         goodsNum: e.join(","),
 
         payType: this.payType,
@@ -278,7 +276,10 @@ export default {
         account: this.account,
         logist: this.settleList.logist,
         commissionType: this.commissionType,
-        goodSource: 0,
+        goodSource: this.settleList.goodSource,
+        orderSn:this.settleList.orderSn,
+        customerSn:this.settleList.customerSn,
+        postage:this.settleList.pos,
         token: md5(`gjfengaddOrder${this.payType}`)
       };
       mui.ajax({

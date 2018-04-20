@@ -30,9 +30,6 @@
       </section>
       <section class="info-2">
         <yd-cell-group>
-          <yd-cell-item v-if="info.isCanUserCou">
-            <span slot="left">剩余：{{info.productAttrStock&&info.productAttrStock.repertory}}</span>
-          </yd-cell-item>
           <template v-if="info.isWholesale=='0'">
             <yd-cell-item v-if="info.isCanUserCou=='1'">
               <span slot="left">积分使用说明:{{info.productAttrStock&&info.productAttrStock.price}}积分 +
@@ -62,6 +59,9 @@
               </span>
             </yd-cell-item>
           </template>
+          <yd-cell-item v-if="info.isCanUserCou">
+            <span slot="left">剩余：{{info.productAttrStock&&info.productAttrStock.repertory}}</span>
+          </yd-cell-item>
           <yd-cell-item arrow type="link" :href="'/online/comment?id='+info.proId">
             <span slot="left">商品评价</span>
           </yd-cell-item>
@@ -423,9 +423,9 @@ export default {
           headers: { "app-version": "v1.0" },
           data: {
             goodsId: this.info.proId,
-            goodsAttrStockId: this.info.productAttrStock.id,
-            goodsAttrIds: this.info.productAttrStock.productAttrIds,
-            goodsAttr: this.info.productAttrStock.productAttrIds,
+            goodsAttrStockId: this.info.productAttrStock.id||'',
+            goodsAttrIds: this.info.productAttrStock.productAttrIds||'',
+            goodsAttr: this.info.productAttrStock.productAttrIds||'',
             goodsNum: this.pdnum,
             logist,
             account: this.account,

@@ -18,6 +18,8 @@ let near = `${index}/near` //获取附近的栏目
 let findNearColum = `${index}/findNearColum` //获取附近的一级栏目
 let findNearSubColum = `${index}/findNearSubColum` //获取附近的一级栏目下的子栏目
 let onlineInH5 = `${index}/onlineInH5` //网上商城首页
+let findNewsList = `${index}/findNewsList` //资讯列表
+let findNewsById = `${index}/findNewsById` //资讯详情
 
 let products = `${pd}/o2o/products` //o2o商城一级栏目或本栏目下的商品
 let product = `${pd}/o2o/productDetail/` //查询O2O商品信息
@@ -100,6 +102,7 @@ let actCartInH5 = `${order}/actCartInH5` //结算购物车
 let yinLPay = `${order}/yinLPay` //银联预下单
 let yinLPayCofirom = `${order}/yinLPayCofirom` //银联支付
 let payOrderSign = `${order}/payOrderSign` //订单付款
+let findOrderPos = `${order}/findOrderPos` //邮费
 
 let newProCommet = baseUrl + `/app/comment/${VERSION}/newProCommet` //添加评论
 let getAllProCommetByPage = baseUrl + `/app/comment/${VERSION}/getAllProCommetByPage` //获取评论
@@ -149,8 +152,6 @@ let findMemberDirectMemberMoney = `${trade}/findMemberDirectMemberMoney` //获�
 
 let findAppUpgredeByType = `${baseUrl}/app/upgrede/${VERSION}/findAppUpgredeByType` //APP版本信息
 
-let findNewsList = `${index}/findNewsList` //资讯列表
-let findNewsById = `${index}/findNewsById` //资讯详情
 
 export {
   o2o,
@@ -160,6 +161,8 @@ export {
   findNearColum,
   findNearSubColum,
   onlineInH5,
+  findNewsList,
+  findNewsById,
 
   hotProduct,
   products,
@@ -242,6 +245,7 @@ export {
   yinLPay,
   yinLPayCofirom,
   payOrderSign,
+  findOrderPos,
 
   newProCommet,
   getAllProCommetByPage,
@@ -290,7 +294,4 @@ export {
   findMemberDirectMemberMoney,
 
   findAppUpgredeByType,
-
-  findNewsList,
-  findNewsById
 }
