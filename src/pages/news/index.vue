@@ -28,7 +28,7 @@
 import { mapState } from "vuex";
 import HeaderTop from "components/header/index";
 import { findNewsList } from "../../api/index";
-import { mixin } from "components/common/mixin";
+import { time } from "components/common/mixin";
 export default {
   name: "News",
   data() {
@@ -40,7 +40,7 @@ export default {
   },
   components: { HeaderTop },
   computed: {...mapState([ "cacheList", "positions"]),},
-  mixins: [mixin],
+  mixins: [time],
   created() {},
   activated() {
     if (this.$route.params.update) {

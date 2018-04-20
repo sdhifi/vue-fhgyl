@@ -23,8 +23,7 @@
                   <span class="address-name">{{item.consigneeName}}</span>
                   <span>{{item.mobile}}</span>
                 </div>
-                <div class="address-detail">{{item.proviceId.province}} {{item.cityId.city}}
-                  <span v-if="item.areaId">{{item.areaId.area}}</span> {{item.addressDetail}}</div>
+                <div class="address-detail">{{item.proviceId.province}}{{item.cityId.city}}<span v-if="item.areaId">{{item.areaId.area}}</span><span v-if="item.townId">{{item.townId.townName}}</span>{{item.addressDetail}}</div>
               </li>
             </ul>
           </swipeout-item>
@@ -57,7 +56,7 @@ export default {
     ...mapState(["account", "addressList"])
   },
   activated() {
-    this.$store.dispatch("getAddressList", { source: 0 });
+    this.$store.dispatch("getAddressList", { source: 5 });
   },
   methods: {
     setDefault(address) {
@@ -68,7 +67,7 @@ export default {
         headers: { "app-version": "v1.0" },
         data: {
           id: address.id,
-          goodSource: 0,
+          goodSource: 5,
           account: this.account,
           token: md5(`gjfengdefault${address.id}${this.account}`)
         },
@@ -79,7 +78,7 @@ export default {
               // 选择地址，选择之后回退页面
               vm.$router.go(-1);
             } else {
-              vm.$store.dispatch("getAddressList", { source: 0 });
+              vm.$store.dispatch("getAddressList", { source: 5 });
               vm.$dialog.toast({
                 mes: "设置默认地址成功"
               });
@@ -109,7 +108,7 @@ export default {
             headers: { "app-version": "v1.0" },
             data: {
               id: item.id,
-              goodSource: 0,
+              goodSource: 5,
               account: getStore("account"),
               token: md5(`gjfengdelAdress${item.id}${getStore("account")}`)
             },
@@ -121,7 +120,7 @@ export default {
                 });
                 return;
               }
-              vm.$store.dispatch("getAddressList", { source: 0 });
+              vm.$store.dispatch("getAddressList", { source: 5 });
             }
           });
         }

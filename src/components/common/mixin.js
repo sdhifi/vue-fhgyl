@@ -44,7 +44,6 @@ export const mixin = {
        */
       var complete = function (time) {
         return time.toString().replace(/^(\d)$/, "0$1");
-        // return time.toString().padStart(2,'0');
       };
       year = date.getFullYear();
       month = complete(date.getMonth() + 1);
@@ -58,7 +57,7 @@ export const mixin = {
      * 格式化金额，返回两位小数
      * @param {*数值} m 
      */
-    formatPrice(m,d=2) {
+    formatPrice(m, d = 2) {
       return (m || 0).toFixed(d);
     },
     /**
@@ -68,7 +67,7 @@ export const mixin = {
     getImgPath(path) {
       return path ? path : (process.env.NODE_ENV == 'development' ? "/static/img/default.png" : "./static/img/default.png")
     },
-     /**
+    /**
      * 格式化图片地址，用户图片
      * @param {*路径} path 
      */
@@ -85,8 +84,8 @@ export const mixin = {
   }
 }
 export const localImg = {
-  methods:{
-    getLocalImg(filename){
+  methods: {
+    getLocalImg(filename) {
       return process.env.NODE_ENV == 'development' ? `/static/img/${filename}` : `./static/img/${filename}`
     }
   }
@@ -121,7 +120,7 @@ export const removeStore = name => {
 export const validateSettle = {
   computed: {
     validStoreName() {
-      return !!this.storeName 
+      return !!this.storeName
     },
     validSellerName() {
       return !!this.sellerName
@@ -182,33 +181,106 @@ export const payMixin = {
     }
   }
 }
-import {findMemberByMoblie} from "../../api/index"
-export const findMemberByMobile={
-  methods:{
+import {
+  findMemberByMoblie
+} from "../../api/index"
+export const findMemberByMobile = {
+  methods: {
     findMember() {
-     
-      if(!this.mobile || this.mobile.length<11){
+
+      if (!this.mobile || this.mobile.length < 11) {
         return;
       }
       let vm = this;
       mui.ajax({
         url: findMemberByMoblie,
         type: "post",
-        headers: { "app-version": "v1.0" },
+        headers: {
+          "app-version": "v1.0"
+        },
         data: {
           account: this.account,
           mobile: this.mobile,
           token: md5(`gjfengfindMemberByMoblie${this.mobile}`)
         },
         success(res) {
-          if(res.code==200){
-            vm.mobileName = res.result?res.result.name || res.result.nickName:"用户不存在";
-          }
-          else {
+          if (res.code == 200) {
+            vm.mobileName = res.result ? res.result.name || res.result.nickName : "用户不存在";
+          } else {
             vm.mobileName = res.msg;
           }
         }
       });
+    }
+  }
+}
+export const time = {
+  methods: {
+    formatTime(date) {
+      Date.prototype.format = function (p) {
+        var o = {
+          "M+": this.getMonth() + 1,
+          "d+": this.getDate(),
+          "h+": this.getHours(),
+          "m+": this.getMinutes(),
+          "s+": this.getSeconds(),
+          "q+": Math.floor((this.getMonth() + 3) / 3),
+          "S": this.getMilliseconds()
+        }
+        if (/(y+)/.test(p)) {
+          p = p.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+          if (new RegExp("(" + k + ")").test(p)) {
+            p = p.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+          }
+        }
+        return p;
+      };
+
+      function getFormatDate(date, pattern) {
+        if (!date) {
+          date = new Date();
+        }
+        if (!pattern) {
+          pattern = "yyyy-MM-dd hh:mm:ss";
+        }
+        return date.format(pattern);
+      };
+      /*  转换long值为日期字符串
+       *  l long值
+       *  pattern 格式字符串,例如：yyyy-MM-dd hh:mm:ss
+       */
+      function getFormatDateByLong(l, pattern) {
+        return getFormatDate(new Date(l), pattern);
+      };
+
+
+      //时间格式转换
+      // function returnDiyDate(date) {
+      //date = parseInt(date);  //强转整型
+      var tDate = getFormatDate(new Date(), "yyyy/MM/dd"); //当前凌晨时间(string)
+      var tTime = new Date(tDate).getTime(); //当前凌晨时间(long)
+      var eTime = 24 * 60 * 60 * 1000; //一天时间(long)
+      var yTime = tTime - eTime; //昨天凌晨时间(long)
+      var byTime = tTime - 2 * eTime; //前天凌晨时间(long)
+      var formatDate = getFormatDateByLong(date, "hh:mm"); //转成时分格式
+      var result = '';
+      if (date >= tTime) {
+        //今天
+        result = formatDate;
+      } else if (date < tTime && date >= yTime) {
+        //昨天
+        result = "昨天 " + formatDate;
+      } else if (date < yTime && date >= byTime) {
+        //前天
+        result = "前天 " + formatDate;
+      } else {
+        //前天之前
+        result = getFormatDateByLong(date, "MM-dd hh:mm");
+      }
+      return result;
+      // };
     }
   }
 }

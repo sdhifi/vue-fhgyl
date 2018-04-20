@@ -1,4 +1,5 @@
-let baseUrl = "http://jin.gjfeng.com/gjfeng-web-client"; //凤凰供应链域名
+// let baseUrl = "http://jin.gjfeng.com/gjfeng-web-client"; //凤凰供应链域名
+let baseUrl = "http://test.gzfzsw.top/gjfeng-web-client"; //凤凰供应链域名
 const VERSION = 'v1_0';
 let index = `${baseUrl}/app/index/${VERSION}`,
   pd = `${baseUrl}/app/product/${VERSION}`,
@@ -147,6 +148,10 @@ let findModelProductColumn = `${trade}/findModelProductColumn` //获取联盟商
 let findMemberDirectMemberMoney = `${trade}/findMemberDirectMemberMoney` //获取联盟商品栏目
 
 let findAppUpgredeByType = `${baseUrl}/app/upgrede/${VERSION}/findAppUpgredeByType` //APP版本信息
+
+let findNewsList = `${index}/findNewsList` //资讯列表
+let findNewsById = `${index}/findNewsById` //资讯详情
+
 export {
   o2o,
   like,
@@ -285,4 +290,7 @@ export {
   findMemberDirectMemberMoney,
 
   findAppUpgredeByType,
+
+  findNewsList,
+  findNewsById
 }

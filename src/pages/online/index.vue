@@ -298,8 +298,7 @@ section {
       color: @red;
       border: 1px solid @red;
       border-radius: 10px;
-      .wh(34px,18px);
-      line-height: 18px;
+      padding: 2px 5px;
       .text-center;
     }
     .news-title {

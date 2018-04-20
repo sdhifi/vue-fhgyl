@@ -23,7 +23,7 @@
                   <span class="address-name">{{item.consigneeName}}</span>
                   <span>{{item.mobile}}</span>
                 </div>
-                <div class="address-detail">{{item.proviceId.province}} {{item.cityId.city}} <span v-if="item.areaId">{{item.areaId.area}}</span> <span v-if="item.townId">{{item.townId.townName}}</span> {{item.addressDetail}}</div>
+                <div class="address-detail">{{item.proviceId.province}}{{item.cityId.city}}<span v-if="item.areaId">{{item.areaId.area}}</span><span v-if="item.townId">{{item.townId.townName}}</span>{{item.addressDetail}}</div>
               </li>
             </ul>
           </swipeout-item>

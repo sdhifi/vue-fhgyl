@@ -111,7 +111,7 @@
           </div>
         </div>
         <div class="middle">
-          <div class="middle-1" v-if="info.isWholesale=='0'">
+          <div class="middle-1" v-if="info.goodSoure!='5'">
             <h3>请选择属性：</h3>
             <div class="flex align-center" v-for="(item,index) in info.attrs" :key="index">
               <span class="attr-name fs-14" v-if="info.isCanUserCou=='2'">责任金兑换</span>
@@ -283,8 +283,8 @@ export default {
             /\/userfiles/g,
             "http://jin.gjfeng.com/userfiles"
           );
-          if (_result.goodSoure != "2") {
-            _result.attrs.forEach((item, index) => {
+          if (_result.goodSoure != "2"||_result.goodSoure != "5") {
+            _result.attrs&&_result.attrs.forEach((item, index) => {
               //排序：防止数据错乱
               item.attrValues.sort(function(a, b) {
                 return a.id - b.id;
@@ -452,14 +452,14 @@ export default {
         //立即购买
         // 商品属性拼接：报错暂不使用，使用ids
         let attrValueStr = [];
-        this.info.attrs.forEach(m => {
+        this.info.attrs&&this.info.attrs.forEach(m => {
           m.attrValues.forEach(n => {
             if (n.selected) {
               attrValueStr.push(`${m.attrName}:${n.attrValueId.attrValue}`);
             }
           });
         });
-        let attrIds = this.info.productAttrStock.productAttrIds;
+        let attrIds = this.info.productAttrStock.productAttrIds?this.info.productAttrStock.productAttrIds:'';
         var tips = '0';
         if (this.info.isWholesale == "1") {
             tips = "0";
@@ -491,10 +491,10 @@ export default {
             vm.$dialog.loading.close();
             let _result = res.result;
             _result.orderAddVos[0].goodsAttr = attrValueStr.join(" ");
-            _result.orderAddVos[0].goodsAttrIds = attrIds.slice(
+            _result.orderAddVos[0].goodsAttrIds =attrIds? attrIds.slice(
               0,
               attrIds.length - 1
-            );
+            ):'';
             _result.orderAddVos[0].goodsAttrStockId =
               vm.info.productAttrStock.id;
             vm.show = false;

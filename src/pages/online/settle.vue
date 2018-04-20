@@ -201,7 +201,7 @@ export default {
   activated() {
     this.$store.dispatch("getInfo");
     this.orderType = this.$route.query.orderType;
-    this.$store.dispatch("getAddressList", { source: 0 });
+    this.$store.dispatch("getAddressList", { source: 5 });
     switch (this.orderType) {
       case "3":
         this.payType = "10";
