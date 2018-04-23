@@ -311,7 +311,7 @@ section {
     .pd-h;
   }
   .pd-item {
-    width: 31%;
+    width: 33%;
     padding: 0.1rem;
     margin-bottom: @pd;
     border: 1px solid #dfdfdf;
