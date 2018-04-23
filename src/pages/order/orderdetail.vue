@@ -66,9 +66,7 @@
         <li class="item flex">
           <span class="left">收货人地址：</span>
           <p class="flex-1">
-            {{info.gjfOrderAddress.reciverProvinceId.province}}{{info.gjfOrderAddress.reciverCityId.city}}
-            <span v-if="info.gjfOrderAddress.reciverAreaId">{{info.gjfOrderAddress.reciverAreaId.area}}</span>
-            {{info.gjfOrderAddress.reciverDetailAddress}}
+            {{info.gjfOrderAddress.reciverProvinceId.province}}{{info.gjfOrderAddress.reciverCityId.city}}<span v-if="info.gjfOrderAddress.reciverAreaId">{{info.gjfOrderAddress.reciverAreaId.area}}</span>{{info.gjfOrderAddress.reciverDetailAddress}}
           </p>
         </li>
       </ul>

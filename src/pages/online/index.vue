@@ -2,6 +2,7 @@
   <div>
     <header-top title="网上商城" :back="false" :login="!loginAccount">注册|登录</header-top>
     <main class='scroll-content'>
+      <yd-pullrefresh  ref="homepage" :callback="refresh" :show-init-tip="false">
       <section>
         <yd-slider :loop="false" :autoplay="3000">
           <yd-slider-item v-for="item in info.indexAds" :key="item.id">
@@ -13,8 +14,8 @@
       </section>
       <section class="vocher-container">
         <div><img :src="getLocalImg('fast.jpg')"></div>
-        <div class="flex align-center news-box">
-          <div class="rolltip">今日资讯：</div>
+        <div class="flex align-center news-box" v-show="info.newList.result.length">
+          <div class="rolltip"><span class="iconfont-large self-announce danger-color"></span></div>
           <yd-rollnotice autoplay="4000" class="flex-1">
             <yd-rollnotice-item v-for="(item,index) in info.newList&&info.newList.result" :key="index">
               <router-link :to="{name:'NewsDetail',query:{id:item.id}}" class="flex align-center" style="width:100%;">
@@ -64,6 +65,7 @@
           </router-link>
         </ul>
       </section>
+      </yd-pullrefresh>
     </main>
     <footer-bar></footer-bar>
   </div>
@@ -112,15 +114,7 @@ export default {
     document.addEventListener("plusready", this.getVersion, false);
   },
   activated() {
-    if (getStore("account") && getStore("account").length > 0) {
-      this.loginAccount = true;
-      this.$store.commit("SET_ACCOUNT", getStore("account"));
-      if (!this.member) {
-        this.$store.dispatch("getInfo");
-      }
-    } else {
-      this.loginAccount = false;
-    }
+    this.checkLogin();
     if (this.$store.state.positions[this.$route.path]) {
       document.querySelector("main").scrollTop = this.$store.state.positions[
         this.$route.path
@@ -133,6 +127,17 @@ export default {
       let isAndroid = u.indexOf("Android") > -1; //android终端
       let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
       this.type = isiOS ? "1" : "0";
+    },
+    checkLogin() {
+      if (getStore("account") && getStore("account").length > 0) {
+        this.loginAccount = true;
+        this.$store.commit("SET_ACCOUNT", getStore("account"));
+        if (!this.member) {
+          this.$store.dispatch("getInfo");
+        }
+      } else {
+        this.loginAccount = false;
+      }
     },
     getInfo() {
       let vm = this;
@@ -166,6 +171,13 @@ export default {
           });
         }
       });
+    },
+    refresh(){
+      let pa = Promise.resolve(this.getInfo());
+      let pb = Promise.resolve(this.checkLogin());
+      Promise.all([pa,pb]).then((a,b)=>{
+        this.$refs.homepage.$emit('ydui.pullrefresh.finishLoad');
+      })
     },
     goProducts(id) {
       this.$router.push({
@@ -294,11 +306,11 @@ section {
     padding: @pd 0.1rem 0;
     .news-tag {
       display: inline-block;
-      margin-right: 0.1rem;
+      margin: 0 0.1rem;
       color: @red;
       border: 1px solid @red;
       border-radius: 10px;
-      padding: 2px 5px;
+      padding: 1px 5px;
       .text-center;
     }
     .news-title {

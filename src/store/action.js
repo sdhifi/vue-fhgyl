@@ -169,6 +169,9 @@ export default {
           let _r = res.result;
           commit(RECORD_SETTLE_LIST,{...state.settleList,..._r})
         }
+        else{
+          return state;
+        }
       }
     })
   }

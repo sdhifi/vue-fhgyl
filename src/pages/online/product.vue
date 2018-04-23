@@ -72,7 +72,7 @@
         <div v-html="info.content" class="pd-content"></div>
       </section>
     </main>
-    <footer class="fix-footer flex align-center" v-show="info.goodSoure!='2'" style="border-top:1px solid #dfdfdf;">
+    <footer class="fix-footer flex align-center" style="border-top:1px solid #dfdfdf;">
       <div class="shopping-cart flex just-center align-center" @click="goShoppingCart">
         <span class="iconfont-large self-shopcart"></span>
         <yd-badge type="danger" class="shopping-num" v-show="account&&cartNum>0">{{cartNum}}</yd-badge>
@@ -155,7 +155,7 @@
               <div class="flex align-center">
                 <yd-spinner v-model="pdnum" :min="1" :max="1" v-if="info.purchasNum==1" readonly></yd-spinner>
                 <div v-else>
-                  <yd-spinner v-model="pdnum" :min="1" :max="info.productAttrStock&&info.productAttrStock.repertory" v-if="info.productAttrStock&&info.productAttrStock.repertory"></yd-spinner>
+                  <yd-spinner v-model="pdnum" :min="(+info.multipleNumber||1)" :max="info.productAttrStock&&((Math.floor(info.productAttrStock.repertory/(+info.multipleNumber||1)))*(info.multipleNumber||1))" v-if="info.productAttrStock&&info.productAttrStock.repertory" :unit="+info.multipleNumber||1"></yd-spinner>
                   <yd-spinner :min="0" :max="0" readonly v-else></yd-spinner>
                 </div>
                 <p style="margin-left:.2rem;">库存
@@ -409,11 +409,6 @@ export default {
         });
         return;
       }
-      //供应链商品物流到付，logist=1
-      let logist=0;
-      if(this.info.isWholesale=='1'){
-        logist=1;
-      }
       if (this.buyType == 0) {
         this.$dialog.loading.open("加入中...");
         mui.ajax({
@@ -427,7 +422,7 @@ export default {
             goodsAttrIds: this.info.productAttrStock.productAttrIds||'',
             goodsAttr: this.info.productAttrStock.productAttrIds||'',
             goodsNum: this.pdnum,
-            logist,
+            logist:this.info.isWholesale=='0'?'0':this.transport,
             account: this.account,
             token: md5(`gjfengaddCart${this.account}`)
           },
@@ -483,7 +478,7 @@ export default {
             "orderAddVos[0].goodsNum": this.pdnum,
             goodSource: this.info.goodSoure,
             orderAddressId: "",
-            logist,
+            logist:this.info.isWholesale=='0'?'0':this.transport,
             account: this.account,
             token: md5(`gjfengtoAddOrder${this.account}`)
           },

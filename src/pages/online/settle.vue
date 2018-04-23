@@ -7,14 +7,14 @@
     </yd-navbar>
     <main class='scroll-content-2'>
       <section class="address-container">
-        <yd-cell-group v-if="!addressList.length">
-          <yd-cell-item arrow type="link" href="/address/new">
+        <yd-cell-group v-if="!defaultAddress">
+          <yd-cell-item arrow type="link" :href="`/address/index?type=choose`">
             <span slot="icon" class="iconfont-large self-location"></span>
             <span slot="left">收货人</span>
             <span slot="right">去添加</span>
           </yd-cell-item>
         </yd-cell-group>
-        <router-link v-else to="/address/index?type=choose" class="flex align-center">
+        <router-link v-else :to="`/address/index?type=choose`" class="flex align-center">
           <div v-if="defaultAddress" class="fs-14 flex-1">
             <p>收货人：
               <span style="margin-right:.2rem;font-weight:bold;">{{defaultAddress.consigneeName}}</span>
@@ -64,16 +64,16 @@
       <yd-cell-group>
         <yd-cell-item>
           <span slot="left">配送方式</span>
-          <span slot="right" class="fs-14" v-if="settleList.logist=='0' && (settleList.isWholesale=='0'||settleList.isWohsalse=='0')">快递：￥{{formatPrice(settleList.pos)}}</span>
-          <span slot="right" class="fs-14" v-if="settleList.logist=='1' ||settleList.isWholesale=='1'||settleList.isWohsalse=='1' ">物流到付</span>
+          <span slot="right" class="fs-14 0" v-if="settleList.logist=='0'">快递：￥{{formatPrice(settleList.pos)}}</span>
+          <span slot="right" class="fs-14 1" v-if="settleList.logist=='1'">物流到付</span>
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left">支付明细</span>
           <span slot="right" class="fs-14" v-if="settleList.isCanUseCou==3">{{settleList.totalAmount}}代金券+￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
           <template slot="right" v-else>
-            <span class="danger-color fs-16" v-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='0'">￥{{formatPrice(total2)}}</span>
-            <span class="danger-color fs-16" v-else-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='1'">￥{{formatPrice(total2)}}</span>
-            <span class="danger-color fs-16" v-else>￥{{settleList.totalAmount}}</span>
+            <span class="danger-color fs-16 1" v-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='0'">￥{{formatPrice(total2)}}</span>
+            <span class="danger-color fs-16 2" v-else-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='1'">￥{{formatPrice(total2)}}</span>
+            <span class="danger-color fs-16 3" v-else>￥{{settleList.totalAmount}}</span>
           </template>
         </yd-cell-item>
         <yd-cell-item>
@@ -95,7 +95,7 @@
             <span class="danger-color 3" v-else-if="orderType=='2'">￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
             <span class="danger-color 4" v-else-if="orderType=='3'">￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
             <template v-else>
-              <span class="danger-color fs-16 5" v-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='0'">￥{{formatPrice(total2)}}</span>
+              <span class="danger-color fs-16 5" v-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='0'">￥{{formatPrice(total2+settleList.pos)}}</span>
               <span class="danger-color fs-16 6" v-else-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='1'">￥{{formatPrice(total2)}}</span>
               <span class="danger-color 7" v-else>￥{{formatPrice(settleList.totalAmount+settleList.pos)}}</span>
             </template>

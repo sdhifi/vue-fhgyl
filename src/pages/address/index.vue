@@ -128,7 +128,7 @@ export default {
       });
     },
     newAddress() {
-      this.$router.push({ name: "AddressNew" });
+      this.$router.push({ name: "AddressNew"});
     }
   }
 };

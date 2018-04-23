@@ -19,10 +19,10 @@
           <yd-input slot="right" readonly v-model="mobileName" :show-clear-icon="false"></yd-input>
         </yd-cell-item>
       </yd-cell-group>
-      <div style="padding: .2rem;">
+      <!-- <div style="padding: .2rem;">
         <check-icon :value.sync="checkProtocol" type="plain">{{checkProtocol?'同意':'不同意'}}</check-icon>
         <router-link :to="{name:'MerchantProtocol',params: {key: type.key}}" class="protocol">《服务条款》和《法律声明》</router-link>
-      </div>
+      </div> -->
       <div class="btn-container flex just-around" style="padding:0 .2rem;">
         <yd-button type="warning" @click.native="goMerchantHistory" style="font-size:15px;"> 赠 送 记 录
           <span class="iconfont self-right"></span>
@@ -48,7 +48,7 @@ export default {
         key: "1",
         value: "商家版"
       },
-      checkProtocol: true,
+      // checkProtocol: true,
       payType: "3",
       list: [
         {

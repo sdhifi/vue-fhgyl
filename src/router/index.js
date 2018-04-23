@@ -76,7 +76,7 @@ const router = new Router({
       meta: {
         keepAlive: false
       }
-    },{
+    }, {
       path: '/online/products',
       name: 'Products',
       component: require('../pages/online/products'),
@@ -245,7 +245,7 @@ const router = new Router({
       meta: {
         keepAlive: true
       }
-    },{
+    }, {
       path: '/trade/bankcard',
       name: 'BankCard',
       component: require('../pages/trade/bankcard'),
@@ -273,7 +273,7 @@ const router = new Router({
       meta: {
         keepAlive: false
       }
-    },{
+    }, {
       path: '/trade/welfrecord',
       name: 'WelfareRecord',
       component: require('../pages/trade/welfrecord'),
@@ -398,14 +398,14 @@ const router = new Router({
       meta: {
         keepAlive: true
       }
-    },{
+    }, {
       path: '/news/detail',
       name: 'NewsDetail',
       component: require('../pages/news/detail'),
       meta: {
         keepAlive: false
       }
-    },  {
+    }, {
       path: '*',
       redirect: '/online/index'
     }

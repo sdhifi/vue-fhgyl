@@ -8,6 +8,7 @@
           <label class="cart-check flex align-center just-center" @click="countChange($event,item,index)" :class="{'checked':item.checked}">
           </label>
           <div class="flex-1">
+              <router-link :to="{name:'Product',query:{id:item.goodsId.id}}">
             <yd-flexbox style="margin-bottom:5px;">
               <img :src="item.goodsId.imgUrl" alt="">
               <yd-flexbox-item style="margin-left:5px;">
@@ -43,13 +44,14 @@
                       <span v-if="item.goodsId.pointNicePrice">+￥{{item.goodsId.pointNicePrice}}</span>
                     </p>
                   </template>
-                  <yd-spinner v-model="item.goodsNum" :min="1" :max="item.goodsId.repertory" v-show="!item.close"></yd-spinner>
+                  <yd-spinner v-model="item.goodsNum" :min="+item.goodsId.multipleNumber||1" :max="(Math.floor(item.goodsId.repertory/(+item.goodsId.multipleNumber||1)))*(item.goodsId.multipleNumber||1)" v-show="!item.close" :unit="+item.goodsId.multipleNumber||1"></yd-spinner>
                   <div v-show="item.close" class="fs-14">
                     ×{{item.goodsNum}}
                   </div>
                 </div>
               </yd-flexbox-item>
             </yd-flexbox>
+              </router-link>
             <div class="cart-operate flex just-between">
               <p @click="editCart(item,index)" v-show="item.close">
                 <span class="iconfont self-bianji"></span>编辑</p>
