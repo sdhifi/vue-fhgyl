@@ -106,6 +106,7 @@ export default {
         return;
       }
       this.reset();
+      this.curIndex = 0;
       this.getProduct();
     },
     changeTab(index) {

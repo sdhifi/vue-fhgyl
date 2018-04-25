@@ -117,7 +117,7 @@ export default {
                 .querySelector(".pd-content")
                 .querySelectorAll("div,p")
             ).forEach(function(e) {
-              e.style.lineHeight = 1.5;
+              e.style.lineHeight = 1;
             });
           });
         }
