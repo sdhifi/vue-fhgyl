@@ -8,13 +8,13 @@
     <main class='scroll-content-2'>
       <section class="address-container">
         <yd-cell-group v-if="!defaultAddress">
-          <yd-cell-item arrow type="link" :href="`/address/index?type=choose`">
+          <yd-cell-item arrow type="link" :href="`/address/index?type=choose&source=${settleList.goodSource}`">
             <span slot="icon" class="iconfont-large self-location"></span>
             <span slot="left">收货人</span>
             <span slot="right">去添加</span>
           </yd-cell-item>
         </yd-cell-group>
-        <router-link v-else :to="`/address/index?type=choose`" class="flex align-center">
+        <router-link v-else :to="`/address/index?type=choose&source=${settleList.goodSource}`" class="flex align-center">
           <div v-if="defaultAddress" class="fs-14 flex-1">
             <p>收货人：
               <span style="margin-right:.2rem;font-weight:bold;">{{defaultAddress.consigneeName}}</span>
@@ -199,7 +199,7 @@ export default {
   activated() {
     this.$store.dispatch("getInfo");
     this.orderType = this.$route.query.orderType;
-    this.$store.dispatch("getAddressList", { source: 5 });
+    this.$store.dispatch("getAddressList", { source: this.settleList.goodSource });
     switch (this.orderType) {
       case "3":
         this.payType = "10";

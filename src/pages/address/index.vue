@@ -56,7 +56,7 @@ export default {
     ...mapState(["account", "addressList"])
   },
   activated() {
-    this.$store.dispatch("getAddressList", { source: 5 });
+    this.$store.dispatch("getAddressList", { source: this.$route.query.source });
   },
   methods: {
     setDefault(address) {
@@ -67,7 +67,7 @@ export default {
         headers: { "app-version": "v1.0" },
         data: {
           id: address.id,
-          goodSource: 5,
+          goodSource: this.$route.query.source,
           account: this.account,
           token: md5(`gjfengdefault${address.id}${this.account}`)
         },
@@ -96,7 +96,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.aaa[index].close();
       });
-      this.$router.push({ name: "AddressEdit", params: { item } });
+      this.$router.push({ name: "AddressEdit", params: { item } ,query:{source:this.$route.query.source}});
     },
     deleteAddress(item) {
       this.$dialog.confirm({
@@ -109,7 +109,7 @@ export default {
             headers: { "app-version": "v1.0" },
             data: {
               id: item.id,
-              goodSource: 5,
+              goodSource: this.$route.query.source,
               account: getStore("account"),
               token: md5(`gjfengdelAdress${item.id}${getStore("account")}`)
             },
@@ -121,14 +121,14 @@ export default {
                 });
                 return;
               }
-              vm.$store.dispatch("getAddressList", { source: 5 });
+              vm.$store.dispatch("getAddressList", { source: vm.$route.query.source });
             }
           });
         }
       });
     },
     newAddress() {
-      this.$router.push({ name: "AddressNew"});
+      this.$router.push({ name: "AddressNew",query:{source:this.$route.query.source}});
     }
   }
 };

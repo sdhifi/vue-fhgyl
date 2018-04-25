@@ -130,10 +130,7 @@ export default {
         success(res) {
           if (res.code == 200) {
             vm.$dialog.toast({
-              mes: "添加成功",
-              callback: () => {
-                vm.$router.go(-1);
-              }
+              mes: "添加成功"
             });
           } else {
             vm.$dialog.toast({

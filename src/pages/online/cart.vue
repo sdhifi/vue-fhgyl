@@ -44,7 +44,7 @@
                       <span v-if="item.goodsId.pointNicePrice">+￥{{item.goodsId.pointNicePrice}}</span>
                     </p>
                   </template>
-                  <yd-spinner v-model="item.goodsNum" :min="+item.goodsId.multipleNumber||1" :max="(Math.floor(item.goodsId.repertory/(+item.goodsId.multipleNumber||1)))*(item.goodsId.multipleNumber||1)" v-show="!item.close" :unit="+item.goodsId.multipleNumber||1"></yd-spinner>
+                  <yd-spinner v-model="item.goodsNum" :min="1" :max="(Math.floor(item.goodsId.repertory/(+item.goodsId.multipleNumber||1)))*(item.goodsId.multipleNumber||1)" v-show="!item.close" :unit="+item.goodsId.multipleNumber||1"></yd-spinner>
                   <div v-show="item.close" class="fs-14">
                     ×{{item.goodsNum}}
                   </div>

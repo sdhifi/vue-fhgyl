@@ -14,7 +14,7 @@
       </section>
       <section class="vocher-container">
         <div><img :src="getLocalImg('fast.jpg')"></div>
-        <div class="flex align-center news-box" v-show="info.newList.result.length">
+        <div class="flex align-center news-box" v-show="info.newList&&info.newList.result.length">
           <div class="rolltip"><span class="iconfont-large self-announce danger-color"></span></div>
           <yd-rollnotice autoplay="4000" class="flex-1">
             <yd-rollnotice-item v-for="(item,index) in info.newList&&info.newList.result" :key="index">

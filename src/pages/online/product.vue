@@ -145,7 +145,7 @@
               </div>
               <div v-if="transport==1" class="flex align-center" style="margin-top:.3rem;">
                 <h3>请选择数量：</h3>
-                <yd-spinner v-model="pdnum" :min="1" :max="info.productAttrStock&&info.productAttrStock.repertory" v-if="info.productAttrStock&&info.productAttrStock.repertory"></yd-spinner>
+                <yd-spinner v-model="pdnum" :min="1" :max="info.productAttrStock&&((Math.floor(info.productAttrStock.repertory/(+info.multipleNumber||1)))*(info.multipleNumber||1))" :unit="+info.multipleNumber||1" v-if="info.productAttrStock&&info.productAttrStock.repertory"></yd-spinner>
                 <span style="margin-left:.3rem;">库存
                   <span class="danger-color">{{info.productAttrStock&&info.productAttrStock.repertory}}</span>件</span>
               </div>
@@ -155,7 +155,7 @@
               <div class="flex align-center">
                 <yd-spinner v-model="pdnum" :min="1" :max="1" v-if="info.purchasNum==1" readonly></yd-spinner>
                 <div v-else>
-                  <yd-spinner v-model="pdnum" :min="(+info.multipleNumber||1)" :max="info.productAttrStock&&((Math.floor(info.productAttrStock.repertory/(+info.multipleNumber||1)))*(info.multipleNumber||1))" v-if="info.productAttrStock&&info.productAttrStock.repertory" :unit="+info.multipleNumber||1"></yd-spinner>
+                  <yd-spinner v-model="pdnum" :min="1" :max="info.productAttrStock&&((Math.floor(info.productAttrStock.repertory/(+info.multipleNumber||1)))*(info.multipleNumber||1))" :unit="+info.multipleNumber||1" v-if="info.productAttrStock&&info.productAttrStock.repertory"></yd-spinner>
                   <yd-spinner :min="0" :max="0" readonly v-else></yd-spinner>
                 </div>
                 <p style="margin-left:.2rem;">库存
@@ -378,7 +378,7 @@ export default {
     },
     changeTransport(value) {
       if (value == 0) {
-        this.pdnum = 1;
+        this.pdnum = +this.info.multipleNumber||1;
       }
     },
     add2cart() {

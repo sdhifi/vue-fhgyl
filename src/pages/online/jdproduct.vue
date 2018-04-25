@@ -40,7 +40,7 @@
         </div>
         <div class="middle flex align-center">
           <h3>请选择数量</h3>
-          <yd-spinner v-model="pdnum" :min="1"></yd-spinner>
+          <yd-spinner v-model="pdnum" :min="1" :max="999"></yd-spinner>
         </div>
         <div class="bottom">
           <yd-button size="large" type="danger" @click.native="buynow">确定</yd-button>

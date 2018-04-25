@@ -3,8 +3,8 @@
     <header-top title="确认订单"></header-top>
     <main class='scroll-content-2'>
       <section class="address-container">
-        <yd-cell-group v-if="!addressList.length">
-          <yd-cell-item arrow type="link" href="/address/jdnew">
+        <yd-cell-group v-if="!defaultAddress">
+          <yd-cell-item arrow type="link" href="/address/jdaddress?type=choose">
             <span slot="icon" class="iconfont-large self-location"></span>
             <span slot="left">收货人</span>
             <span slot="right">去添加</span>
@@ -16,16 +16,14 @@
               <span style="margin-right:.2rem;font-weight:bold;">{{defaultAddress.consigneeName}}</span>
               <span>{{defaultAddress.mobile}}</span>
             </p>
-            <p>收货地址：{{defaultAddress.proviceId.province}}{{defaultAddress.cityId.city}}
-              <span v-if="defaultAddress.areaId">{{defaultAddress.areaId.area}}</span>{{defaultAddress.addressDetail}}</p>
+            <p>收货地址：{{defaultAddress.proviceId.province}}{{defaultAddress.cityId.city}}<span v-if="defaultAddress.areaId">{{defaultAddress.areaId.area}}</span><span v-if="defaultAddress.townId">{{defaultAddress.townId.townName}}</span>{{defaultAddress.addressDetail}}</p>
           </div>
           <div v-else-if="addressList[0]" class="fs-14 flex-1">
             <p>收货人：
               <span style="margin-right:.2rem;font-weight:bold;">{{addressList[0].consigneeName}}</span>
               <span>{{addressList[0].mobile}}</span>
             </p>
-            <p>收货地址：{{addressList[0].proviceId.province}}{{addressList[0].cityId.city}}
-              <span v-if="addressList[0].areaId">{{addressList[0].areaId.area}}</span>{{addressList[0].addressDetail}}</p>
+            <p>收货地址：{{addressList[0].proviceId.province}}{{addressList[0].cityId.city}}<span v-if="addressList[0].areaId">{{addressList[0].areaId.area}}</span><span v-if="addressList[0].townId">{{addressList[0].townId.townName}}</span>{{addressList[0].addressDetail}}</p>
           </div>
           <span class="iconfont self-right"></span>
         </router-link>
@@ -174,7 +172,10 @@ export default {
         account: this.account,
         logist: this.settleList.logist,
         commissionType: this.commissionType,
-        goodSource: 1,
+        goodSource: this.settleList.goodSource,
+        orderSn:this.settleList.orderSn,
+        customerSn:this.settleList.customerSn,
+        postage:this.settleList.pos,
         token: md5(`gjfengaddOrder${this.payType}`)
       };
       mui.ajax({
