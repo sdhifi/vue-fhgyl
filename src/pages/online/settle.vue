@@ -293,10 +293,10 @@ export default {
             //品牌商城
             if (vm.orderType == 0) {
               //支付宝
-              vm.zfbPay(_result.payString);
+              vm.zfbPay(decodeURIComponent(_result.payString));
             } else if (vm.orderType == 3) {
               //代金券
-              vm.payPos(_result.payString, res.msg);
+              vm.payPos(decodeURIComponent(_result.payString), res.msg);
             }
           } else {
             vm.$dialog.toast({

@@ -92,7 +92,6 @@ export default {
     goBack() {
       this.$router.replace("/online/index");
     },
-
     reset() {
       this.pageNo = 1;
       this.$refs.mainList.scrollTop = 0;

@@ -13,9 +13,12 @@
         <li class="tab-item" :class="{'danger-bg':curIndex==index}" @click="changeTab(index)" v-for="(item,index) in tabList" :key="index">{{item.names}}</li>
       </ul>
       <div class="main-list" ref="mainList">
-        <select v-model="discount" @change="filterProduct" class="select-container">
-          <option :value="item.key" v-for="(item,index) in dlist" :key="index">{{item.value}}</option>
-        </select>
+        <div class="flex align-center">
+          <span class="fs-15 orange-color" style="color: #ff7625;">折扣筛选：</span>
+          <select v-model="discount" @change="filterProduct" class="select-container flex-1">
+            <option :value="item.key" v-for="(item,index) in dlist" :key="index">{{item.value}}</option>
+          </select>
+        </div>
         <main class="product-list">
           <yd-infinitescroll :callback="getProduct" ref="pdlist">
             <ul class="flex" slot="list">
@@ -160,6 +163,7 @@ export default {
         return;
       }
       this.reset();
+      this.curIndex=0;
       this.getProduct();
     },
     filterProduct() {
@@ -219,13 +223,15 @@ export default {
   width: 80%;
   padding: 5px;
   .select-container {
+    height: 0.65rem;
+    line-height: 0.65rem;
+    overflow: hidden;
     background-image: url(../../assets/select.png);
-    background-size: cover;
-    width: 100%;
-    padding: 0.15rem;
+    background-size: 100% 100%;
+    padding-left: 0.15rem;
     font-size: 0.3rem;
-    margin-bottom: 0.1rem;
     z-index: 1000;
+    border: none;
   }
   .product-list {
     position: absolute;
