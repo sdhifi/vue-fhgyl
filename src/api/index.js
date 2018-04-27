@@ -37,7 +37,8 @@ let findProprietaryJdCategory = `${pd}/findProprietaryJdCategory` //获取京东
 let findJdProprietaryProByCatId = `${pd}/findJdProprietaryProByCatId` //获取分类商品
 let findJdProprietaryProDetail = `${pd}/findJdProprietaryProDetail` //获取京东自营商城分类商品详情
 let addJdProprietaryProduct = `${pd}/addJdProprietaryProduct` //添加京东商品信息
-let toAddOrder = `${pd}/toAddOrder` //立即下单
+let toAddOrder = `${pd}/toAddOrder` //立即购买
+let addOrder = `${order}/addOrder` //下单
 
 let findProdutCat = `${baseUrl}/wx/product/findProdutCat` //天猫|淘宝目录
 let findProductList = `${baseUrl}/wx/product/findProductList` //天猫|淘宝商品
@@ -96,7 +97,6 @@ let getOrder = `${order}/getOrder` //我的订单
 let orderDetail = `${order}/detail` //订单详情
 let updateOrderStatus = `${order}/updateOrderStatus` //确认收货
 let findO2oOrderByPage = `${order}/findO2oOrderByPage` //店铺订单
-let addOrder = `${order}/addOrder` //下单
 let toAdd = `${order}/toAdd` //立即购买下单
 let actCartInH5 = `${order}/actCartInH5` //结算购物车
 let yinLPay = `${order}/yinLPay` //银联预下单

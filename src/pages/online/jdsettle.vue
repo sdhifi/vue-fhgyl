@@ -186,7 +186,7 @@ export default {
         success(res) {
           let _result = res.result;
           res.code == 200
-            ? vm.zfbPay(_result.payString)
+            ? vm.zfbPay(_result.alyString)
             : vm.$dialog.toast({
                 mes: res.msg
               });
