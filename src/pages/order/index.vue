@@ -211,7 +211,7 @@ export default {
             vm.checkService(vm.pays["alipay"], function() {
               plus.payment.request(
                 vm.pays["alipay"],
-                _result.payString,
+                _result.payString||_result.alyString,
                 function(result) {
                   vm.$dialog.alert({
                     mes: "支付成功",
@@ -264,7 +264,7 @@ export default {
             vm.checkService(vm.pays["alipay"], function() {
               plus.payment.request(
                 vm.pays["alipay"],
-                _result.alyString,
+                _result.payString||_result.alyString,
                 function(result) {
                   vm.$dialog.alert({
                     mes: "支付成功",
