@@ -377,9 +377,9 @@ export default {
       });
     },
     changeTransport(value) {
-      if (value == 0) {
-        this.pdnum = +this.info.multipleNumber||1;
-      }
+      // if (value == 0) {
+        this.pdnum = 1;
+      // }
     },
     add2cart() {
       if (!this.account) {
