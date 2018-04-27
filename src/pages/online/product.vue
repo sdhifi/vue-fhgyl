@@ -49,12 +49,12 @@
           </template>
           <template v-else>
             <yd-cell-item>
-              <span slot="left" class="primary-color">商家兑换：{{info.productAttrStock&&info.productAttrStock.standardTotalAmount}}
+              <span slot="left" class="primary-color">商家兑换：{{info.productAttrStock&&info.productAttrStock.standardTotalAmount*10}}
                 <span class="iconfont self-quan"></span>
               </span>
             </yd-cell-item>
             <yd-cell-item>
-              <span slot="left" class="royal-color">企业兑换：{{info.productAttrStock&&info.productAttrStock.honourTotalAmount}}
+              <span slot="left" class="royal-color">企业兑换：{{info.productAttrStock&&info.productAttrStock.honourTotalAmount*10}}
                 <span class="iconfont self-quan"></span>
               </span>
             </yd-cell-item>
