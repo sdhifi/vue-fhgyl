@@ -49,12 +49,12 @@
           </template>
           <template v-else>
             <yd-cell-item>
-              <span slot="left" class="primary-color">商家兑换：{{info.productAttrStock&&info.productAttrStock.standardTotalAmount*10}}
+              <span slot="left" class="primary-color">商家兑换：{{info.productAttrStock&&formatPrice(info.productAttrStock.standardTotalAmount*10)}}
                 <span class="iconfont self-quan"></span>
               </span>
             </yd-cell-item>
             <yd-cell-item>
-              <span slot="left" class="royal-color">企业兑换：{{info.productAttrStock&&info.productAttrStock.honourTotalAmount*10}}
+              <span slot="left" class="royal-color">企业兑换：{{info.productAttrStock&&formatPrice(info.productAttrStock.honourTotalAmount*10)}}
                 <span class="iconfont self-quan"></span>
               </span>
             </yd-cell-item>
@@ -98,10 +98,10 @@
               <p class="danger-color fs-14" v-else>￥{{info.productAttrStock&&info.productAttrStock.price}}</p>
             </template>
             <template v-else>
-              <p class="danger-color fs-14" v-if="+member.merchantType>1">{{info.productAttrStock&&info.productAttrStock.honourTotalAmount*10}}
+              <p class="danger-color fs-14" v-if="+member.merchantType>1">{{info.productAttrStock&&formatPrice(info.productAttrStock.honourTotalAmount*10)}}
                 <span class="iconfont self-quan"></span>
               </p>
-              <p class="danger-color fs-14" v-else>{{info.productAttrStock&&info.productAttrStock.standardTotalAmount*10}}
+              <p class="danger-color fs-14" v-else>{{info.productAttrStock&&formatPrice(info.productAttrStock.standardTotalAmount*10)}}
                 <span class="iconfont self-quan"></span>
               </p>
             </template>

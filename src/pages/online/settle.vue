@@ -69,7 +69,7 @@
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left">支付明细</span>
-          <span slot="right" class="fs-14" v-if="settleList.isCanUseCou==3">{{settleList.totalAmount}}代金券+￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
+          <span slot="right" class="fs-14" v-if="settleList.isCanUseCou==3">{{settleList.totalAmount}}代金券+￥{{formatPrice(settleList.pos)}}</span>
           <template slot="right" v-else>
             <span class="danger-color fs-16 1" v-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='0'">￥{{formatPrice(total2)}}</span>
             <span class="danger-color fs-16 2" v-else-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='1'">￥{{formatPrice(total2)}}</span>
@@ -92,8 +92,8 @@
             支付：
             <span class="danger-color 1" v-if="orderType=='1'&&!$route.query.buynow">￥{{formatPrice(settleList.pointNiceAmount+settleList.pos)}}</span>
             <span class="danger-color 2" v-else-if="orderType=='1'&&$route.query.buynow">￥{{formatPrice(settleList.pointNiceAmount)}}</span>
-            <span class="danger-color 3" v-else-if="orderType=='2'">￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
-            <span class="danger-color 4" v-else-if="orderType=='3'">￥{{formatPrice(settleList.pointNiceAmount||settleList.pos)}}</span>
+            <span class="danger-color 3" v-else-if="orderType=='2'">￥{{formatPrice(settleList.pos)}}</span>
+            <span class="danger-color 4" v-else-if="orderType=='3'">￥{{formatPrice(settleList.pos)}}</span>
             <template v-else>
               <span class="danger-color fs-16 5" v-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='0'">￥{{formatPrice(total2+settleList.pos)}}</span>
               <span class="danger-color fs-16 6" v-else-if="(settleList.isWholesale=='1' || settleList.isWohsalse=='1')&&settleList.logist=='1'">￥{{formatPrice(total2)}}</span>
