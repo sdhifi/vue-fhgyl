@@ -3,7 +3,7 @@
     <header-top title="商品详情"></header-top>
     <main class='scroll-content'>
       <section class="info-1">
-        <swiper :aspect-ratio="0.8" :show-desc-mask="false" dots-position="center" :loop="false">
+        <swiper :aspect-ratio="1" :show-desc-mask="false" dots-position="center" :loop="false">
           <swiper-item v-for="(item, index) in imgList" :key="index">
             <img :src="item">
           </swiper-item>
@@ -13,13 +13,13 @@
           <template v-if="info.isWholesale=='0'">
             <span v-if="info.isCanUserCou=='0'">￥{{info.productAttrStock&&info.productAttrStock.price}}</span>
             <span v-else-if="info.isCanUserCou=='1'">{{info.productAttrStock&&info.productAttrStock.price}}
-              <span class="fs-12" style="margin-left:.1rem;">积分</span>
+              <span class="fs-12">积分</span>
             </span>
             <span v-else-if="info.isCanUserCou=='2'">{{info.productAttrStock&&info.productAttrStock.price}}
-              <span class="fs-12" style="margin-left:.1rem;">责任金额</span>
+              <span class="fs-12">责任金额</span>
             </span>
             <span v-else-if="info.isCanUserCou=='3'">{{info.productAttrStock&&info.productAttrStock.price}}
-              <span class="fs-14" style="margin-left:.1rem;">代金券金额</span>
+              <span class="fs-14">代金券</span>
             </span>
           </template>
           <template v-else>
@@ -42,7 +42,7 @@
               </span>
             </yd-cell-item>
             <yd-cell-item v-else-if="info.isCanUserCou=='3'">
-              <span slot="left">代金券使用说明:{{info.productAttrStock&&info.productAttrStock.price}}代金券金额 +
+              <span slot="left">代金券使用说明:{{info.productAttrStock&&info.productAttrStock.price}}代金券 +
                 <span class="danger-color">￥{{info.pointNeedMoney || 0}}</span>
               </span>
             </yd-cell-item>
