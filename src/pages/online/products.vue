@@ -72,7 +72,7 @@ export default {
   mixins:[mixin],
   created() {},
   activated() {
-    if (this.$route.params.update) {
+    if (this.$route.query.update=='true') {
       this.$store.dispatch("getCartList");
       this.reset();
       this.type = this.$route.query.type;

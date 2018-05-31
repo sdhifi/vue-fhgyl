@@ -101,6 +101,21 @@ input[type='button'],button{
 .text-center{
   text-align: center;
 }
+.clearfix{
+  &:after{
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
 .generate-fz(@n, @i: 10) when (@i<=@n) {
   .fs-@{i} {
       font-size: 1px * @i!important;

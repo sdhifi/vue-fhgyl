@@ -43,7 +43,7 @@ export default {
   mixins: [time],
   created() {},
   activated() {
-    if (this.$route.params.update) {
+    if (this.$route.query.update=='true') {
       this.reset();
       this.$refs.pdlist.$emit("ydui.infinitescroll.reInit");
       this.getNews();

@@ -13,7 +13,6 @@
         </yd-slider>
       </section>
       <section class="vocher-container">
-        <div><img :src="getLocalImg('fast.jpg')"></div>
         <div class="flex align-center news-box" v-show="info.newList&&info.newList.result.length">
           <div class="rolltip"><span class="iconfont-large self-announce danger-color"></span></div>
           <yd-rollnotice autoplay="4000" class="flex-1">
@@ -24,47 +23,156 @@
               </router-link>
             </yd-rollnotice-item>
           </yd-rollnotice>
-          <router-link :to="{name:'News',params:{update:true}}">更多></router-link>
+          <router-link :to="{name:'News',query:{query:true}}">更多></router-link>
         </div>
       </section>
       <section class="platform-container flex just-around">
+        <div class="discount-tag">优惠购</div>
         <div v-for="(item,index) in platform" :key="index" class="platform-item" @click="navigate(item.link)">
           <img :src="getLocalImg(item.img)">
+          <p>{{item.text}}</p>
         </div>
       </section>
-      <section class="pd-list" v-for="(item,index) in pds" :key="index">
-        <yd-cell-group>
-          <yd-cell-item arrow type="label" @click.native="goProducts(item.id)">
-            <span slot="icon" class="iconfont self-libao" style="color:#f98e25;font-size:20px;"></span>
-            <span slot="left">{{item.label}}</span>
-            <span slot="right">更多</span>
-          </yd-cell-item>
-        </yd-cell-group>
-        <ul class="flex just-between">
-          <router-link :to="{path:'/online/product',query:{id:pd.id}}" v-for="pd in item.list" :key="pd.id" tag="li" class="pd-item">
-            <div class="img-cover">
-              <img :src="pd.imgUrl" :alt="pd.name">
+      <section class="high-container">
+          <img :src="getLocalImg('20180529_1.png')" alt="直降到底 嗨翻618">
+        </section>
+        <section class="hot-container">
+          <div class="hot-box">
+            <div class="hot-header">
+              <img :src="getLocalImg('20180529_4.png')" alt="">
+              <span>今日必抢</span>
             </div>
-            <div class="title flex align-center">
-              <h3>{{pd.name}}</h3>
+            <ul class="type-list clearfix">
+              <li class="type-item pd-item fl">
+                <div class="img-cover">
+                  <img src="http://admin.ttyg168.cn/public/upload/goods/2018/04-04/1d1f309ca9fab0d3e6119d9cc22860ad.jpg">
+                </div>
+                <div class="type-title jianbian-bg1">必备厨具</div>
+              </li>
+              <li class="type-item pd-item fl">
+                <div class="img-cover">
+                  <img src="http://admin.ttyg168.cn/public/upload/goods/2018/04-04/1d1f309ca9fab0d3e6119d9cc22860ad.jpg">
+                </div>
+                <div class="type-title jianbian-bg1">家用电器</div>
+              </li>
+              <li class="type-item pd-item fl">
+                <div class="img-cover">
+                  <img src="http://admin.ttyg168.cn/public/upload/goods/2018/04-04/1d1f309ca9fab0d3e6119d9cc22860ad.jpg">
+                </div>
+                <div class="type-title jianbian-bg1">酒水副食</div>
+              </li>
+            </ul>
+          </div>
+          <template v-for="(item,index) in pds">
+            <div :key="index" class="hot-box">
+              <div class="hot-header">
+                <img :src="getLocalImg('20180529_4.png')" alt="">
+                <span>{{item.label}}</span>
+              </div>
+              <ul class="pd-list clearfix">
+                <router-link :to="{path:'/online/product',query:{id:pd.id}}" v-for="pd in item.list.slice(0,3)" :key="pd.id" tag="li" class="pd-item fl">
+                  <div class="img-cover">
+                    <img :src="pd.imgUrl" :alt="pd.name">
+                  </div>
+                  <div class="title">
+                    <h3>{{pd.name}}</h3>
+                  </div>
+                  <div class="price">
+                    零售价:
+                    <span class="danger-color fs-15">￥{{pd.price}}</span>
+                  </div>
+                </router-link>
+              </ul>
             </div>
-            <div class="price" v-if="pd.isCanUserCou=='1'">
-              <span>￥{{formatPrice(pd.pointNicePrice)}}</span>+
-              <span>{{pd.price}}积分</span>
+          </template>
+        </section>
+        <section class="activity-container clearfix">
+          <div class="activity-header" :style="{'background-image':formatBg('20180529_2.png')}">
+            <span class="jianbian-text1">爱生活</span>
+          </div>
+          <div class="activity-item fl">
+            <div class="activity-text fl">
+              <h3 class="activity-name">超值家电</h3>
+              <p>美的大功率吸尘器</p>
+              <span class="activity-desc jianbian-bg2">领券购物更优惠</span>
             </div>
-            <div class="price" v-else-if="pd.isCanUserCou=='2'">
-              <span>￥{{formatPrice(pd.pointNicePrice)}}</span>+
-              <span>{{pd.price}}责任金额</span>
+            <div class="activity-thumb fr">
+              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
             </div>
-            <div class="price" v-else-if="pd.isCanUserCou=='3'">
-              <span>{{pd.price}}代金券</span>
+          </div>
+          <div class="activity-item fl">
+            <div class="activity-text fl">
+              <h3 class="activity-name">精选厨具</h3>
+              <p>美的大功率吸尘器</p>
             </div>
-            <div class="price" v-else>
-              <span>￥{{formatPrice(pd.price)}}</span>
+            <div class="activity-thumb fr">
+              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
             </div>
-          </router-link>
-        </ul>
-      </section>
+          </div>
+          <div class="activity-item fl">
+            <div class="activity-text fl">
+              <h3 class="activity-name">开胃饮料</h3>
+              <p>SO有机苹果醋</p>
+            </div>
+            <div class="activity-thumb fr">
+              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
+            </div>
+          </div>
+          <div class="activity-item fl">
+            <div class="activity-text fl">
+              <h3 class="activity-name">男士理容</h3>
+              <p>飞科全身水洗电动剃须刀</p>
+            </div>
+            <div class="activity-thumb fr">
+              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
+            </div>
+          </div>
+        </section>
+        <section class="activity-container clearfix">
+          <div class="activity-header" :style="{'background-image':formatBg('20180529_2.png')}">
+            <span class="jianbian-text1">购好物</span>
+          </div>
+          <div class="activity-item fl">
+            <div class="activity-text fl">
+              <h3 class="activity-name">就爱高颜值</h3>
+              <p>美的大功率吸尘器</p>
+            </div>
+            <div class="activity-thumb fr">
+              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
+            </div>
+          </div>
+          <div class="activity-item fl">
+            <div class="activity-text fl">
+              <h3 class="activity-name">美容护肤</h3>
+              <p>白藜芦醇温润丰唇膏</p>
+            </div>
+            <div class="activity-thumb fr">
+              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
+            </div>
+          </div>
+          <div class="activity-item fl">
+            <div class="activity-text fl">
+              <h3 class="activity-name">大牌特价</h3>
+              <p>TCL多功能家用电烤箱</p>
+            </div>
+            <div class="activity-thumb fr">
+              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
+            </div>
+          </div>
+          <div class="activity-item fl">
+            <div class="activity-text fl">
+              <h3 class="activity-name">送礼首选</h3>
+              <p>贵州茅台天朝上品贵人酒</p>
+              <span class="activity-desc jianbian-bg2">好物低价任你抢</span>
+            </div>
+            <div class="activity-thumb fr">
+              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
+            </div>
+          </div>
+        </section>
+        <section class="merchant-container">
+          <img :src="getLocalImg('20180529_3.jpg')" alt="开通跨行业盈利系统">
+        </section>
       </yd-pullrefresh>
     </main>
     <footer-bar></footer-bar>
@@ -85,10 +193,11 @@ export default {
       pds: [],
       loginAccount: false,
       platform: [
-        { img: "jingdong.png", link: "/online/jdindex" },
-        { img: "tianmao.jpg", link: "/online/tmindex" },
-        { img: "taobao.jpg", link: "/online/tmindex" },
-        { img: "lianying.png", link: "/online/jdself" }
+        { img: "taobao.jpg", link: "/online/tmindex", text: "淘宝" },
+        { img: "tianmao.png", link: "/online/tmindex", text: "天猫" },
+        { img: "jingdong.jpg", link: "/online/jdindex", text: "京东" },
+        { img: "ziying.png", link: "/online/products?type=1&id=1398&update=true", text: "自营商城" },
+        { img: "column.png", link: "/online/allcolumn", text: "所有分类" }
       ],
       type: "", //APP环境
       curVersion: "" //app版本
@@ -182,8 +291,7 @@ export default {
     goProducts(id) {
       this.$router.push({
         name: "Products",
-        params: { update: true },
-        query: { type: 1, id }
+        query: { type: 1, id,update: true }
       });
     },
     navigate(link) {
@@ -198,8 +306,7 @@ export default {
     goVocher() {
       this.$router.push({
         name: "Products",
-        params: { update: true },
-        query: { type: 1, id: 1415 }
+        query: { type: 1, id: 1415,update: true }
       });
     },
     getVersion() {
@@ -281,20 +388,35 @@ export default {
 </script>
 <style lang='less' scoped>
 @import "../../style/mixin.less";
-section {
-  margin-bottom: @pd / 2;
-  background-color: @white;
-}
 .yd-slider-item img {
   max-height: 4rem;
 }
 .platform-container {
-  padding: 0.2rem 0 0.1rem;
+   background-color: @white;
+  padding: 0.5rem 0 0.1rem;
+  position: relative;
+  overflow: hidden;
+  .discount-tag {
+    position: absolute;
+    left: -0.15rem;
+    top: 0;
+    border-radius: 10px;
+    background-color: rgb(228, 1, 12);
+    color: @white;
+    font-size: 0.24rem;
+    padding: 2px 0.1rem;
+    width: 1rem;
+    text-align: right;
+  }
   .platform-item {
     margin-bottom: @pd;
-    width: 45%;
+    text-align: center;
     img {
-      width: 100%;
+      .wh(1rem,1rem);
+      border-radius: 50%;
+    }
+    p {
+      font-size: 0.26rem;
     }
   }
 }
@@ -318,23 +440,49 @@ section {
     }
   }
 }
-.pd-list {
-  ul {
-    .pd-h;
+.high-container {
+  background-color: @white;
+  margin-top: 3px;
+  img {
+    width: 100%;
+  }
+}
+.hot-container {
+  padding-bottom: @pd;
+  background-color: rgb(254, 30, 54);
+  .hot-box {
+    .hot-header {
+      position: relative;
+      color: @white;
+      font-weight: bold;
+      text-align: center;
+      img {
+        .wh(4rem,0.8rem);
+      }
+
+      span {
+        .hv-cen;
+        font-size: 0.32rem;
+        z-index: 5;
+      }
+    }
   }
   .pd-item {
-    width: 33%;
+    width: 30.6%;
+    margin-left: 2%;
     padding: 0.1rem;
-    margin-bottom: @pd;
-    border: 1px solid #dfdfdf;
+    background-color: @white;
     .img-cover {
       position: relative;
       width: 100%;
       overflow: hidden;
       padding: 50% 0;
+      background-color: @white;
+      border-radius: 2px;
       img {
         width: 100%;
         .hv-cen;
+        border-radius: 2px;
       }
     }
     .title {
@@ -342,7 +490,8 @@ section {
       line-height: 20px;
       h3 {
         .multi-ellipsis(2);
-        font-size: 0.3rem;
+        padding: 0 2px;
+        font-size: 0.26rem;
         font-weight: normal;
         word-wrap: break-word;
         word-break: break-all;
@@ -351,15 +500,92 @@ section {
     }
     .price {
       margin-top: 0.1rem;
-      font-size: 14px;
-      span:first-of-type {
-        color: @red;
+      font-size: 0.2rem;
+      text-align: right;
+    }
+  }
+  .type-item {
+    .type-title {
+      color: @white;
+      font-size: 0.28rem;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 0.4rem;
+      margin: 0.2rem;
+      padding: 3px 0;
+    }
+  }
+}
+.jianbian-bg1 {
+  background: -webkit-linear-gradient(left, rgb(252, 10, 34), rgb(242, 134, 0));
+}
+.jianbian-bg2 {
+  background: -webkit-linear-gradient(
+    left,
+    rgb(248, 44, 131),
+    rgb(250, 92, 65)
+  );
+}
+.jianbian-text1 {
+  display: inline-block;
+  background: -webkit-linear-gradient(left, rgb(73, 38, 180), rgb(7, 158, 227));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.activity-container {
+  background-color: rgb(242, 242, 242);
+  .activity-header {
+    .pd-v;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-align: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .activity-item {
+    width: 50%;
+    min-height: 2rem;
+    padding: 10px 0;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    background-color: @white;
+    box-shadow: 0 0 1px rgba(120, 120, 120, 0.3);
+    &:nth-of-type(2n) {
+      border-right: none;
+    }
+    .activity-text {
+      width: 60%;
+      padding-left: 8px;
+      
+      p {
+        font-size: 10px;
+        color: rgb(153, 153, 153);
+        margin:5px 0;
       }
-      span:nth-of-type(2) {
-        font-size: 12px;
-        color: @lightgray;
+      .activity-desc {
+        color: #fff;
+        font-size: 8px;
+        padding: 3px 5px;
+        border-radius: 3px;
       }
     }
+    .activity-thumb {
+      width: 40%;
+      img {
+        width: 100%;
+        padding-right: 8px;
+      }
+    }
+    .activity-name {
+      font-size: 16px;
+    }
+  }
+}
+.merchant-container {
+  .pd;
+  img {
+    width: 100%;
   }
 }
 </style>
