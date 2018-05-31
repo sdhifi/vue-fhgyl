@@ -551,7 +551,7 @@ export default {
     border-bottom: 1px solid #eee;
     background-color: @white;
     box-shadow: 0 0 1px rgba(120, 120, 120, 0.3);
-    &:nth-of-type(2n) {
+    &:nth-of-type(2n+1) {
       border-right: none;
     }
     .activity-text {

@@ -111,6 +111,14 @@ const router = new Router({
       meta: {
         keepAlive: true
       }
+    },
+    {
+      path: '/online/allcolumn',
+      name: 'AllColumn',
+      component: require('../pages/online/allcolumn'),
+      meta: {
+        keepAlive: true
+      }
     }, {
       path: '/address/index',
       name: 'AddressManage',
