@@ -33,7 +33,7 @@
           <p>{{item.text}}</p>
         </div>
       </section>
-      <section class="bank-container">
+      <section class="bank-container" @click="navigateBank">
         <div class="top-text">
           <span>&gt;&gt;&gt;</span>
           <span>民生银行分期购 0手续费</span>
@@ -310,6 +310,9 @@ export default {
         return;
       }
       this.$router.push({ path: link });
+    },
+    navigateBank(){
+      location.href='https://wlg.creditcard.cmbc.com.cn/sub_center/login/login.action?code=WLGDG00038'
     },
     goVocher() {
       this.$router.push({
