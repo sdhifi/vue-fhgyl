@@ -33,6 +33,14 @@
           <p>{{item.text}}</p>
         </div>
       </section>
+      <section class="bank-container">
+        <div class="top-text">
+          <span>&gt;&gt;&gt;</span>
+          <span>民生银行分期购 0手续费</span>
+          <span>&lt;&lt;&lt;</span>
+        </div>
+        <p>轻松购物 乐享生活</p>
+      </section>
       <section class="high-container">
           <img :src="getLocalImg('20180529_1.png')" alt="直降到底 嗨翻618">
         </section>
@@ -440,9 +448,25 @@ export default {
     }
   }
 }
+.bank-container{
+  background-color: #308fd9;
+  color: @white;
+  text-align: center;
+  .pd-v;
+  .top-text{
+    font-size: .34rem;
+    span:nth-of-type(2){
+      display: inline-block;
+      margin: 0 .1rem;
+    }
+  }
+  p{
+    font-size: .24rem;
+    margin-top: .1rem;
+  }
+}
 .high-container {
   background-color: @white;
-  margin-top: 3px;
   img {
     width: 100%;
   }
