@@ -554,6 +554,7 @@ export default {
   display: inline-block;
   background: -webkit-linear-gradient(left, rgb(73, 38, 180), rgb(7, 158, 227));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .activity-container {
