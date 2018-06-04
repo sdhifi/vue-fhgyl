@@ -28,7 +28,7 @@
       </section>
       <section class="platform-container flex just-around">
         <div class="discount-tag">优惠购</div>
-        <div v-for="(item,index) in platform" :key="index" class="platform-item" @click="navigate(item.link)">
+        <div v-for="(item,index) in platform" :key="index" class="platform-item" @click="navigate(item.link,{id:item.id,type:item.type})">
           <img :src="getLocalImg(item.img)">
           <p>{{item.text}}</p>
         </div>
@@ -48,37 +48,25 @@
           <div class="hot-box">
             <div class="hot-header">
               <img :src="getLocalImg('20180529_4.png')" alt="">
-              <span>今日必抢</span>
+              <span>{{info.indexSupColumns&&info.indexSupColumns[0].faterColumnName}}</span>
             </div>
             <ul class="type-list clearfix">
-              <li class="type-item pd-item fl">
+              <li class="type-item pd-item fl" v-for="(item,index) in info.indexSupColumns&&info.indexSupColumns[0].supColumn" :key="index">
                 <div class="img-cover">
-                  <img src="http://admin.ttyg168.cn/public/upload/goods/2018/04-04/1d1f309ca9fab0d3e6119d9cc22860ad.jpg">
+                  <img :src="item.pic1">
                 </div>
-                <div class="type-title jianbian-bg1">必备厨具</div>
-              </li>
-              <li class="type-item pd-item fl">
-                <div class="img-cover">
-                  <img src="http://admin.ttyg168.cn/public/upload/goods/2018/04-04/1d1f309ca9fab0d3e6119d9cc22860ad.jpg">
-                </div>
-                <div class="type-title jianbian-bg1">家用电器</div>
-              </li>
-              <li class="type-item pd-item fl">
-                <div class="img-cover">
-                  <img src="http://admin.ttyg168.cn/public/upload/goods/2018/04-04/1d1f309ca9fab0d3e6119d9cc22860ad.jpg">
-                </div>
-                <div class="type-title jianbian-bg1">酒水副食</div>
+                <div class="type-title jianbian-bg1">{{item.shortName}}</div>
               </li>
             </ul>
           </div>
-          <template v-for="(item,index) in pds">
-            <div :key="index" class="hot-box">
+          <template v-for="(item,index) in info.indexProducts">
+            <div :key="index" class="hot-box" v-if="item.product.length>0">
               <div class="hot-header">
                 <img :src="getLocalImg('20180529_4.png')" alt="">
-                <span>{{item.label}}</span>
+                <span>{{item.columnName}}</span>
               </div>
               <ul class="pd-list clearfix">
-                <router-link :to="{path:'/online/product',query:{id:pd.id}}" v-for="pd in item.list.slice(0,3)" :key="pd.id" tag="li" class="pd-item fl">
+                <router-link :to="{path:'/online/product',query:{id:pd.id}}" v-for="pd in item.product" :key="pd.id" tag="li" class="pd-item fl">
                   <div class="img-cover">
                     <img :src="pd.imgUrl" :alt="pd.name">
                   </div>
@@ -94,87 +82,17 @@
             </div>
           </template>
         </section>
-        <section class="activity-container clearfix">
+        <section class="activity-container clearfix" v-for="(item,index) in info.indexSupColumns&&info.indexSupColumns.slice(1)" :key="index">
           <div class="activity-header" :style="{'background-image':formatBg('20180529_2.png')}">
-            <span class="jianbian-text1">爱生活</span>
+            <span class="jianbian-text1">{{item.faterColumnName}}</span>
           </div>
-          <div class="activity-item fl">
+          <div class="activity-item fl" v-for="(aItem,aIndex) in item.supColumn" :key="aIndex" @click="navigate('Products',{id:aItem.id,type:1})">
             <div class="activity-text fl">
-              <h3 class="activity-name">超值家电</h3>
-              <p>美的大功率吸尘器</p>
-              <span class="activity-desc jianbian-bg2">领券购物更优惠</span>
+              <h3 class="activity-name">{{aItem.names}}</h3>
+              <p>{{aItem.intro}}</p>
             </div>
             <div class="activity-thumb fr">
-              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
-            </div>
-          </div>
-          <div class="activity-item fl">
-            <div class="activity-text fl">
-              <h3 class="activity-name">精选厨具</h3>
-              <p>美的大功率吸尘器</p>
-            </div>
-            <div class="activity-thumb fr">
-              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
-            </div>
-          </div>
-          <div class="activity-item fl">
-            <div class="activity-text fl">
-              <h3 class="activity-name">开胃饮料</h3>
-              <p>SO有机苹果醋</p>
-            </div>
-            <div class="activity-thumb fr">
-              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
-            </div>
-          </div>
-          <div class="activity-item fl">
-            <div class="activity-text fl">
-              <h3 class="activity-name">男士理容</h3>
-              <p>飞科全身水洗电动剃须刀</p>
-            </div>
-            <div class="activity-thumb fr">
-              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
-            </div>
-          </div>
-        </section>
-        <section class="activity-container clearfix">
-          <div class="activity-header" :style="{'background-image':formatBg('20180529_2.png')}">
-            <span class="jianbian-text1">购好物</span>
-          </div>
-          <div class="activity-item fl">
-            <div class="activity-text fl">
-              <h3 class="activity-name">就爱高颜值</h3>
-              <p>美的大功率吸尘器</p>
-            </div>
-            <div class="activity-thumb fr">
-              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
-            </div>
-          </div>
-          <div class="activity-item fl">
-            <div class="activity-text fl">
-              <h3 class="activity-name">美容护肤</h3>
-              <p>白藜芦醇温润丰唇膏</p>
-            </div>
-            <div class="activity-thumb fr">
-              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
-            </div>
-          </div>
-          <div class="activity-item fl">
-            <div class="activity-text fl">
-              <h3 class="activity-name">大牌特价</h3>
-              <p>TCL多功能家用电烤箱</p>
-            </div>
-            <div class="activity-thumb fr">
-              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
-            </div>
-          </div>
-          <div class="activity-item fl">
-            <div class="activity-text fl">
-              <h3 class="activity-name">送礼首选</h3>
-              <p>贵州茅台天朝上品贵人酒</p>
-              <span class="activity-desc jianbian-bg2">好物低价任你抢</span>
-            </div>
-            <div class="activity-thumb fr">
-              <img src="http://statics.76sd.com/data/files/goods/20180111/5a56b972287ad.jpg" alt="">
+              <img :src="aItem.pic1||aItem.pic2" alt="">
             </div>
           </div>
         </section>
@@ -191,7 +109,7 @@ import { mapState } from "vuex";
 import HeaderTop from "components/header/index";
 import FooterBar from "components/footer/index";
 import { mixin, getStore, setStore, localImg } from "components/common/mixin";
-import { onlineInH5, findAppUpgredeByType } from "../../api/index";
+import { supplyChainOnlineShopIndex, findAppUpgredeByType } from "../../api/index";
 export default {
   name: "Online",
   data() {
@@ -201,11 +119,11 @@ export default {
       pds: [],
       loginAccount: false,
       platform: [
-        { img: "taobao.jpg", link: "/online/tmindex", text: "淘宝" },
-        { img: "tianmao.png", link: "/online/tmindex", text: "天猫" },
-        { img: "jingdong.jpg", link: "/online/jdindex", text: "京东" },
-        { img: "ziying.png", link: "/online/products?type=1&id=1398&update=true", text: "自营商城" },
-        { img: "column.png", link: "/online/allcolumn", text: "所有分类" }
+        { img: "taobao.jpg", link: "TianMao", text: "淘宝" },
+        { img: "tianmao.png", link: "TianMao", text: "天猫" },
+        { img: "jingdong.jpg", link: "JingDong", text: "京东" },
+        { img: "ziying.png", link: "Products",text: "自营商城",id:1398,type:1 },
+        { img: "column.png", link: "AllColumn", text: "所有分类" }
       ],
       type: "", //APP环境
       curVersion: "" //app版本
@@ -260,26 +178,16 @@ export default {
       let vm = this;
       this.$dialog.loading.open();
       mui.ajax({
-        url: onlineInH5,
+        url: supplyChainOnlineShopIndex,
         type: "post",
         headers: { "app-version": "v1.0" },
         data: {
-          token: md5(`gjfengonlineInH5`)
+          token: md5(`gjfengsupplyChainOnlineShopIndex`)
         },
         success(res) {
           vm.$dialog.loading.close();
           let _pds = [];
-          Object.entries(res.result.indexProducts).forEach((value, index) => {
-            var item = {};
-            var desc = value[0].split(/[;|~]/);
-            item.label = desc[0];
-            item.icon = desc[1];
-            item.id = desc[2];
-            item.list = value[1];
-            _pds.push(item);
-          });
           vm.info = res.result;
-          vm.pds = _pds;
         },
         error(e) {
           vm.$dialog.loading.close();
@@ -296,20 +204,25 @@ export default {
         this.$refs.homepage.$emit('ydui.pullrefresh.finishLoad');
       })
     },
-    goProducts(id) {
-      this.$router.push({
+    navigate(link,p) {
+      //商品列表
+      if(p.id){
+        this.$router.push({
         name: "Products",
-        query: { type: 1, id,update: true }
+        params:{update:true},
+        query: p
       });
-    },
-    navigate(link) {
+      }
+        //其他平台
+      else{
       if (!link) {
         this.$dialog.toast({
           mes: "数据对接中，敬请期待！"
         });
         return;
       }
-      this.$router.push({ path: link });
+      this.$router.push({ name: link});
+      }
     },
     navigateBank(){
       location.href='https://wlg.creditcard.cmbc.com.cn/sub_center/login/login.action?code=WLGDG00038'
@@ -317,7 +230,8 @@ export default {
     goVocher() {
       this.$router.push({
         name: "Products",
-        query: { type: 1, id: 1415,update: true }
+        params:{update:true},
+        query: { type: 1, id: 1415 }
       });
     },
     getVersion() {

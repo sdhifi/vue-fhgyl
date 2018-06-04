@@ -18,6 +18,7 @@ let near = `${index}/near` //获取附近的栏目
 let findNearColum = `${index}/findNearColum` //获取附近的一级栏目
 let findNearSubColum = `${index}/findNearSubColum` //获取附近的一级栏目下的子栏目
 let onlineInH5 = `${index}/onlineInH5` //网上商城首页
+let supplyChainOnlineShopIndex = `${index}/supplyChainOnlineShopIndex` //网上商城首页
 let findNewsList = `${index}/findNewsList` //资讯列表
 let findNewsById = `${index}/findNewsById` //资讯详情
 
@@ -161,6 +162,7 @@ export {
   findNearColum,
   findNearSubColum,
   onlineInH5,
+  supplyChainOnlineShopIndex,
   findNewsList,
   findNewsById,
 
