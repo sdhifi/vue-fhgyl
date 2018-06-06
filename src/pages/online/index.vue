@@ -51,7 +51,7 @@
               <span>{{info.indexSupColumns&&info.indexSupColumns[0].faterColumnName}}</span>
             </div>
             <ul class="type-list clearfix">
-              <li class="type-item pd-item fl" v-for="(item,index) in info.indexSupColumns&&info.indexSupColumns[0].supColumn" :key="index">
+              <li class="type-item pd-item fl" v-for="(item,index) in info.indexSupColumns&&info.indexSupColumns[0].supColumn" :key="index" @click="navigate('Products',{id:item.id,type:1})">
                 <div class="img-cover">
                   <img :src="item.pic1">
                 </div>
