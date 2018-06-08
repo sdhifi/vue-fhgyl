@@ -41,8 +41,8 @@
         </div>
         <p>轻松购物 乐享生活</p>
       </section>
-      <section class="high-container">
-          <img :src="getLocalImg('20180529_1.png')" alt="直降到底 嗨翻618">
+      <section class="high-container" v-for="(item,index) in info.indexActivity" :key="index">
+          <img :src="item.photo" @click="navigate('Products',{id:item.address.slice(item.address.lastIndexOf('/')+1),type:1})">
         </section>
         <section class="hot-container">
           <div class="hot-box">
