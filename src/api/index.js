@@ -1,5 +1,4 @@
-let baseUrl = "http://jin.gjfeng.com/gjfeng-web-client"; //凤凰供应链域名
-// let baseUrl = "http://test.gzfzsw.top/gjfeng-web-client"; //凤凰供应链域名
+let baseUrl = "http://jin.gzfzsw.top/gjfeng-web-client"; //凤凰供应链域名
 const VERSION = 'v1_0';
 let index = `${baseUrl}/app/index/${VERSION}`,
   pd = `${baseUrl}/app/product/${VERSION}`,
