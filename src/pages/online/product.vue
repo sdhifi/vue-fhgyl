@@ -280,8 +280,8 @@ export default {
           }
           //图片路径处理
           _result.content = _result.content.replace(
-            /\/userfiles/g,
-            "http://jin.gjfeng.com/userfiles"
+            /"\/userfiles/g,
+            "\"http://jin.gzfzsw.top/userfiles"
           );
           if (_result.goodSoure != "2"||_result.goodSoure != "5") {
             _result.attrs&&_result.attrs.forEach((item, index) => {
